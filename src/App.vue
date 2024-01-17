@@ -7,17 +7,11 @@ import SearchBar from './components/SearchBar.vue'
 <template>
   <header>
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
       <SearchBar />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
     </div>
   </header>
 
-  <RouterView />
+  <!-- <RouterView /> -->
 </template>
 
 <style scoped>

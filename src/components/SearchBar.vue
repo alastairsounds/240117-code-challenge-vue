@@ -1,45 +1,29 @@
 <script setup>
-defineProps({
-  msg: {
-    type: String,
-    required: true
+import { ref } from 'vue'
+import movieService from '../services/movieService'
+import MovieList from './MovieList.vue'
+
+let search = ref('')
+let movies = ref([])
+
+const searchMovies = async () => {
+  try {
+    movies.value = await movieService.searchMovies(search.value)
+  } catch (err) {
+    console.error('error:' + err)
   }
-})
+}
 </script>
 
 <template>
-  <div class="greetings">
-    <!-- create a search bar -->
-    <!-- the search bar takes in a movie name, and passes the name as a string to /movies?search={title} -->
-    <h3>Search for a movie</h3>
-    <form action="/movies" method="get">
-      <input type="text" name="search" placeholder="Search for a movie" />
-      <button type="submit">Search</button>
-    </form>
+  <div>
+    <div class="greetings">
+      <h3>Search for a movie</h3>
+      <form @submit.prevent="searchMovies">
+        <input v-model="search" type="text" name="search" placeholder="Search for a movie" />
+        <button type="submit">Search</button>
+      </form>
+    </div>
+    <MovieList :movies="movies" />
   </div>
 </template>
-
-<style scoped>
-h1 {
-  font-weight: 500;
-  font-size: 2.6rem;
-  position: relative;
-  top: -10px;
-}
-
-h3 {
-  font-size: 1.2rem;
-}
-
-.greetings h1,
-.greetings h3 {
-  text-align: center;
-}
-
-@media (min-width: 1024px) {
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
-  }
-}
-</style>
