@@ -1,6 +1,5 @@
 export default {
   async searchMovies(search) {
-    console.log(search)
     const url = `https://api.themoviedb.org/3/search/movie?query=${search}&include_adult=false&language=en-US&page=1`
     const options = {
       method: 'GET',
@@ -10,8 +9,6 @@ export default {
           'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiYzdkYjViMWM2ZmQ0NDRkOWU5MTBlNTY2NWExYjY1ZCIsInN1YiI6IjY1YTgwMjY1NTI5NGU3MDEyZGQyZWUzMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gqKK2rMTkD4E7fXnIs8HmSB2RsZg1FRTHvkfwMR-GW4'
       }
     }
-
-    console.log(url)
 
     const response = await fetch(url, options)
     const json = await response.json()
@@ -29,8 +26,6 @@ export default {
         popularity_summary: `Popularity score of ${movie.popularity} from ${movie.vote_count} votes`
       }
     })
-
-    console.log(json.results)
 
     return json.results
   }
